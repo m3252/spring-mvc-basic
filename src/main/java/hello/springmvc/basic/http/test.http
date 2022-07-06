@@ -22,3 +22,6 @@ GET http://localhost:8080/request-param-default
 
 ###
 GET http://localhost:8080/request-param-map?username=moon&age=32
+
+###
+GET http://localhost:8080/model-attribute-v2?username=moon&age=32
