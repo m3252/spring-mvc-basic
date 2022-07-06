@@ -25,3 +25,23 @@ GET http://localhost:8080/request-param-map?username=moon&age=32
 
 ###
 GET http://localhost:8080/model-attribute-v2?username=moon&age=32
+
+###
+POST http://localhost:8080/request-body-string-v1
+
+hello
+
+###
+POST http://localhost:8080/request-body-string-v2
+
+hello
+
+###
+POST http://localhost:8080/request-body-string-v3
+
+hello
+
+###
+POST http://localhost:8080/request-body-string-v4
+
+hello
