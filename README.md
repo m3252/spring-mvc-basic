@@ -64,3 +64,17 @@ public interface HttpMessageConverter<T> {
 
 
 ---
+
+### ArgumentResolver
+> 애노테이션 기반의 컨트롤러에서 매우 다양한 파라미터를 사용할 수 있는데 이 다양한 파라미터를 생성해주는 책임을 맡은 곳이 <b>ArgumentResolver</b> 이다.
+
+애노테이션 기반의 컨트롤러를 처리하는 RequestMappingHandlerAdaptor 는 <b>ArgumentResolver</b> 를 호출해서 컨트롤러(즉 핸들러)가 필요로 하는 다양한 파라미터의 값(객체)를 생성한다. 그리고 이렇게 파라미터의 값이 모두 준비되면 컨트롤러를 호출하면서 값을 넘겨준다.
+
+![img.png](img.png)  
+[출처 : (인프런) 스프링 MVC 1편 - 김영한](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1)
+
+
+* 스프링은 30개가 넘는 ArgumentResolver 를 기본으로 제공한다.
+
+#### ArgumentResolver 살펴보기
+
