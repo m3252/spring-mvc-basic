@@ -38,18 +38,27 @@ public interface HttpMessageConverter<T> {
 
 스프링 부트는 다양한 메시지 컨버터를 제공하는데, 대상 클래스 타입과 미디어 타입을 체크해서 사용여부를 결정한다. 만약 조건에 맞지 않다면 다음 메시지 컨버터로 우선순위가 넘어간다.
 
-> xxxHttpMessageConverter.canRead() = false   
-> xxxHttpMessageConverter.canWrite() = false
+> xxxHttpMessageConverter.canRead() = false => next converter
+> xxxHttpMessageConverter.canWrite() = false => next converter
 
 0. ByteArrayHttpMessageConverter 
    - class type : byte[]
-   - media type : */*
+   - media type : \*/*
+   - 요청 예) @RequestBody byte[] data
+   - 응답 예) @ResponseBody return byte[] 
+   - 쓰기 미디어 타입 : application/octet-stream 
 1. StringHttpMessageConverter
    - class type : String
-   - media type : */*
+   - media type : \*/*
+   - 요청 예) @RequestBody String data
+   - 응답 예) @ResponseBody return "ok"
+   - 쓰기 미디어 타입 : text/plain
 2. MappingJackson2HttpMessageConverter
    - class type : object or HashMap
    - media type : application/json
+   - 요청 예) @RequestBody HelloData data
+   - 응답 예) @ResponseBody return new HelloData()
+   - 쓰기 미디어 타입 : application/json  
 
 ... 등등
 
