@@ -78,3 +78,59 @@ public interface HttpMessageConverter<T> {
 
 #### ArgumentResolver 살펴보기
 
+다형성을 잘 활용한 ArgumentResolver 의 인터페이스 내부 구조
+
+```java
+public interface HandlerMethodArgumentResolver {
+
+	/**
+	 * Whether the given {@linkplain MethodParameter method parameter} is
+	 * supported by this resolver.
+	 * @param parameter the method parameter to check
+	 * @return {@code true} if this resolver supports the supplied parameter;
+	 * {@code false} otherwise
+	 */
+	boolean supportsParameter(MethodParameter parameter);
+
+	/**
+	 * Resolves a method parameter into an argument value from a given request.
+	 * A {@link ModelAndViewContainer} provides access to the model for the
+	 * request. A {@link WebDataBinderFactory} provides a way to create
+	 * a {@link WebDataBinder} instance when needed for data binding and
+	 * type conversion purposes.
+	 * @param parameter the method parameter to resolve. This parameter must
+	 * have previously been passed to {@link #supportsParameter} which must
+	 * have returned {@code true}.
+	 * @param mavContainer the ModelAndViewContainer for the current request
+	 * @param webRequest the current request
+	 * @param binderFactory a factory for creating {@link WebDataBinder} instances
+	 * @return the resolved argument value, or {@code null} if not resolvable
+	 * @throws Exception in case of errors with the preparation of argument values
+	 */
+	@Nullable
+	Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,
+			NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception;
+
+}
+```
+
+  
+### ReturnValueHandler
+> @ResponseBody, String, HttpEntity 등 반환 값에 대한 컨버팅 작업을 해준다. 
+
+- ArgumentResolver 와 비슷한 구조를 갖고 있다.
+
+### HTTP 메시지 컨버터
+
+![img_2.png](img_2.png)
+
+ArgumentResolver 들이 HTTP 메시지 컨버터를 사용해서 필요한 객체를 생성한다.  
+
+@RequestBody, @ResponseBody 가 있으면 RequestResponseBodyMethodProcessor 가 동작한다.
+
+![img_1.png](img_1.png)
+
+
+
+
+
